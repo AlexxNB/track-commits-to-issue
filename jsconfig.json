@@ -1,0 +1,10 @@
+{
+    "baseURL":".",
+    "compilerOptions": {
+        "paths": {
+            "@lib/*": ["./src/lib/*"],
+            "@testlib/*": ["./src/lib/test/*"],
+            "@tracker": ["./src/tracker.js"]
+        }
+    }
+}

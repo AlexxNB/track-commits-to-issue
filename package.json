@@ -1,0 +1,30 @@
+{
+  "name": "track-commits-to-issue",
+  "version": "1.0.0",
+  "description": "Github Action to load commits list from one repo and make the issue with list of changed files in other repo",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "node esbuild --dev",
+    "token:save": "npm run build:dev && node dist/test --save-token",
+    "token:delete": "npm run build:dev && node dist/test --clear-token",
+    "start": "npm run build:dev && node dist/test ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexxNB/track-commits-to-issue.git"
+  },
+  "author": "Alexey Schebelev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexxNB/track-commits-to-issue/issues"
+  },
+  "homepage": "https://github.com/AlexxNB/track-commits-to-issue#readme",
+  "devDependencies": {
+    "@actions/core": "^1.2.6",
+    "dayjs": "^1.10.4",
+    "esbuild": "^0.9.6",
+    "github-api": "^3.4.0",
+    "sha256": "^0.2.0"
+  }
+}
