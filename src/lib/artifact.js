@@ -11,10 +11,18 @@ const options = {
 
 export async function saveArtifact(){
     console.log('Saving artifact with current timestamp...');
-    await artifactClient.uploadArtifact(NAME, [FILE], '.', options);
+    try{
+        await artifactClient.uploadArtifact(NAME, [FILE], '.', options);
+    }catch(err){
+        console.log('Error while saving artifact!')
+    }
 }
 
 export async function loadArtifact(){
     console.log('Loading artifact with last timestamp...');
-    await artifactClient.downloadArtifact(NAME, undefined, options)
+    try{
+        await artifactClient.downloadArtifact(NAME, undefined, options)
+    }catch(err){
+        console.log('No artifacts found...')
+    }
 }
