@@ -1,0 +1,24 @@
+name: 'track-commits-to-issue'
+description: 'Track commits list in one repo and make the issue with list of changed files in other repo'
+author: Alexey Schebelev
+branding:
+  icon: list
+  color: blue
+inputs:
+  owner:  
+    description: 'Owner of tracking repository'
+    required: true
+  repo:  
+    description: 'Name of repository to track'
+    required: true
+  dir:  
+    description: 'Subdirectory in repo to track'
+  token:  
+    description: 'Github Token to handle much requests or have access to private repositories'
+  title:  
+    description: 'Issue title'
+  days:  
+    description: 'Maximum days to retrieve commits first time'
+runs:
+  using: 'node12'
+  main: 'dist/action.js'

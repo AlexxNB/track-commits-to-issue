@@ -4,6 +4,7 @@
   "description": "Github Action to load commits list from one repo and make the issue with list of changed files in other repo",
   "main": "index.js",
   "scripts": {
+    "build": "node esbuild --action",
     "build:dev": "node esbuild --dev",
     "token:save": "npm run build:dev && node dist/test --save-token",
     "token:delete": "npm run build:dev && node dist/test --clear-token",
