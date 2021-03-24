@@ -1,3 +1,4 @@
+export {loadArtifact,saveArtifact} from '@lib/artifact';
 import timestamp from '@lib/timestamp';
 import dayjs from 'dayjs';
 

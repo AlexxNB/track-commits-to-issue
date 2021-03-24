@@ -1,5 +1,5 @@
 import core from '@actions/core';
-import {checkRepo} from '@tracker';
+import {checkRepo,loadArtifact,saveArtifact} from '@tracker';
 
 (async ()=>{
     try {
@@ -14,7 +14,9 @@ import {checkRepo} from '@tracker';
             dstOwner: owner,
             dstRepo: repo
         }
+        await loadArtifact();
         await checkRepo(opts);
+        await saveArtifact();
       } catch (error) {
         core.setFailed(error.message);
       }

@@ -7,10 +7,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Get Last Check Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: last_check
     - name: Check commits in remote repo
       uses: ./
       with:
@@ -19,8 +15,3 @@ jobs:
         repo: kit
         dir: documentation
         days: 3
-    - name: 'Save Last Check Artifact'
-      uses: actions/upload-artifact@v2
-      with:
-        name: last_check
-        path: .last_check
