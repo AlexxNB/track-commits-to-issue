@@ -9,7 +9,8 @@ export async function checkRepo(options){
         token: options.token,
         owner: options.srcOwner,
         repo: options.srcRepo,
-        dir: options.srcDir
+        dir: options.srcDir,
+        max_period: options.max_period
     });
 
     if(!list.length) return console.log('No new commits.')
@@ -37,7 +38,7 @@ async function getChangedFiles(opts){
         max_period: 5,
         ...opts
     };
-    opts.since = (lastCheck && dayjs.unix(lastCheck).toDate()) || dayjs().subtract(max_period,'days').toDate();
+    opts.since = (lastCheck && dayjs.unix(lastCheck).toDate()) || dayjs().subtract(opts.max_period,'days').toDate();
 
     const list = await GH.getChangedFiles(opts);
     timestamp.save();
