@@ -1,5 +1,3 @@
-export {loadArtifact,saveArtifact} from '@lib/artifact';
-import timestamp from '@lib/timestamp';
 import dayjs from 'dayjs';
 
 import github from '@lib/github';
@@ -34,15 +32,13 @@ export async function checkRepo(options){
 
 async function getChangedFiles(opts){
     const GH = github(opts.token);
-    const lastCheck = timestamp.get();
     opts = {
-        max_period: 5,
+        max_period: 1,
         ...opts
     };
-    opts.since = (lastCheck && dayjs.unix(lastCheck).toDate()) || dayjs().subtract(opts.max_period,'days').toDate();
+    opts.since = dayjs().subtract(opts.max_period,'days').toDate();
 
     const list = await GH.getChangedFiles(opts);
-    timestamp.save();
 
     return list;
 }
