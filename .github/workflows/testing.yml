@@ -3,7 +3,7 @@ on: [push]
 jobs:
   test-action:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Testing action
     steps:
     - name: Check commits in remote repo
       uses: ./
