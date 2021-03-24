@@ -5,11 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing action
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
     - name: Check commits in remote repo
       uses: ./
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        owner: 'sveltejs'
-        repo: 'kit'
-        dir: 'documentation'
+        owner: sveltejs
+        repo: kit
+        dir: documentation
         days: 3
