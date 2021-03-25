@@ -33,7 +33,7 @@ jobs:
 
 ### Inputs
 
-- `token` - action may work without token, but there is a limit of 60 API request and it may be not enough if there was a lot of commits. Use `${{ secrets.GITHUB_TOKEN }}` default token `action-bot` and tracking any public repository. Or you can get [personal token](https://github.com/settings/tokens) (with repository permission) and track any public or private repo where you have access. Don't write your token in workflow file directly – use repo's _Settings-Secrets_!
+- `token` - Use `${{ secrets.GITHUB_TOKEN }}` default token of the `actions-bot` and you will be able tracking any public repository. Or you can get [personal token](https://github.com/settings/tokens) (with repository permission) and track any public or private repo where you have access. Don't write your token in workflow file directly – use repo's _Settings-Secrets_!
 - `owner` - owner of watching repo
 - `repo` - name of the of watching repo
 - `dir` - optional, watch only a subdirectory of the repo. It should be relative path to target directory from the root of repo – ex. `content/documentation`.
