@@ -17,8 +17,8 @@ inputs:
     description: 'Github Token to handle much requests or have access to private repositories'
   title:  
     description: 'Issue title'
-  days:  
-    description: 'Maximum days to retrieve commits first time'
+  hours:  
+    description: 'Maximum hours to retrieve commits first time'
 runs:
   using: 'node12'
   main: 'dist/action.js'

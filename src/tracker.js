@@ -20,8 +20,6 @@ export async function checkRepo(options){
         since: since
     });
 
-    if(!list.length) return console.log('No new commits.')
-
     const body = getMarkdown({
         owner: options.srcOwner,
         repo: options.srcRepo,
