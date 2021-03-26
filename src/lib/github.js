@@ -83,5 +83,5 @@ async function getActionLastRunDate(octokit,opts){
         workflow_id: opts.workflow_id,
         per_page: 1
     });
-    return runs.data[0] && runs.data[0].created_at;
+    return runs.data.total_count > 0 && runs.data.workflow_runs[0].updated_at;
 }

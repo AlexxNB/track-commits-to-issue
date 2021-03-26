@@ -8,7 +8,7 @@ export async function checkRepo(options){
         token: options.token,
         owner: options.dstOwner,
         repo: options.dstRepo,
-        max_period: options.max_period || 1,
+        max_period: options.max_period || 24,
         workflow_id: options.workflow_id
     });
 
@@ -41,7 +41,7 @@ export async function checkRepo(options){
 }
 
 async function getSince(opts){
-    let since = dayjs().subtract(opts.max_period,'days').toDate();
+    let since = dayjs().subtract(opts.max_period,'hours').toDate();
 
     if(opts.workflow_id){
         console.log('Check last run for workflow #'+opts.workflow_id);
@@ -56,11 +56,14 @@ async function getSince(opts){
 
 async function getChangedFiles(opts){
     const GH = github(opts.token);
+    console.log('Fetch changed files since',opts.since,'...');
     const list = await GH.getChangedFiles(opts);
+    console.log('Found',list.length,'commits!');
     return list;
 }
 
 async function postIssue(opts){
+    console.log(`Posting an issue at ${opts.owner}/${opts.repo}...`)
     const GH = github(opts.token);
     await GH.postIssue(opts);
 }
