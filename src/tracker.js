@@ -6,8 +6,8 @@ import {getMarkdown} from '@lib/render';
 export async function checkRepo(options){
     const since = await getSince({
         token: options.token,
-        owner: options.srcOwner,
-        repo: options.srcRepo,
+        owner: options.dstOwner,
+        repo: options.dstRepo,
         max_period: options.max_period || 1,
         workflow_id: options.workflow_id
     });
