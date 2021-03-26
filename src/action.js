@@ -4,6 +4,7 @@ import {checkRepo} from '@tracker';
 (async ()=>{
     try {
         const [owner,repo] = process.env['GITHUB_REPOSITORY'].split('/');
+        const workflow_id = process.env['GITHUB_ACTION'];
         const opts = {
             token: core.getInput('token'),
             srcOwner: core.getInput('owner'),
@@ -12,7 +13,8 @@ import {checkRepo} from '@tracker';
             title: core.getInput('title'),
             max_period: core.getInput('days'),
             dstOwner: owner,
-            dstRepo: repo
+            dstRepo: repo,
+            workflow_id
         }
         await checkRepo(opts);
       } catch (error) {
