@@ -72,13 +72,13 @@ async function postIssue(octokit,opts){
         body: opts.body
     });
 }
-
+octokit.rest.actions.listWorkflowRuns
 async function getActionLastRunDate(octokit,opts){
     const repo = {
         owner: opts.owner,
         repo: opts.repo
     }
-    const runs = await octokit.rest.issues.create({
+    const runs = await octokit.rest.actions.listWorkflowRuns({
         ...repo,
         workflow_id: opts.workflow_id,
         per_page: 1
