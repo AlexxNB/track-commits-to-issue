@@ -14,4 +14,4 @@ jobs:
         owner: sveltejs
         repo: kit
         dir: documentation
-        days: 1
+        days: 3
