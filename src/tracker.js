@@ -20,6 +20,8 @@ export async function checkRepo(options){
         since: since
     });
 
+    if(!list.length) return;
+
     const body = getMarkdown({
         owner: options.srcOwner,
         repo: options.srcRepo,
@@ -35,7 +37,6 @@ export async function checkRepo(options){
         repo: options.dstRepo,
         body: body
     })
-    console.log('Done!');
 }
 
 async function getSince(opts){
@@ -64,4 +65,5 @@ async function postIssue(opts){
     console.log(`Posting an issue at ${opts.owner}/${opts.repo}...`)
     const GH = github(opts.token);
     await GH.postIssue(opts);
+    console.log('Issue created!');
 }
