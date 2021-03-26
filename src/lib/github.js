@@ -1,35 +1,44 @@
-import GitHub from 'github-api';
+import github from '@actions/github';
 import sha256 from 'sha256';
 import dayjs from 'dayjs';
 
 export default function(token){
-    const gh = new GitHub({token});
+    const octokit = github.getOctokit(token)
     return {
-        getChangedFiles: (opts)=>getChangedFiles(gh,opts),
-        postIssue: (opts)=>postIssue(gh,opts)
+        getChangedFiles: (opts)=>getChangedFiles(octokit,opts),
+        postIssue: (opts)=>postIssue(octokit,opts),
+        getActionLastRunDate: (opts)=>getActionLastRunDate(octokit,opts)
     }
 }
 
-async function getChangedFiles(gh,opts){
+async function getChangedFiles(octokit,opts){
     let page = 1;
     let per_page = 20;
     let result = [];
 
-    const repo = gh.getRepo(opts.owner,opts.repo);
+    const repo = {
+        owner: opts.owner,
+        repo: opts.repo
+    }
     
     let length;
     do{
 
-        let list = await repo.listCommits({
+        let list = await octokit.rest.repos.listCommits({
+            ...repo,
             path:opts.dir,
             per_page,
             page: page++,
             since: opts.since 
         });
+
         length = list.data.length;
 
         for(let {sha} of list.data){
-            const {data} = await repo.getSingleCommit(sha);
+            const {data} = await octokit.rest.repos.getCommit({
+                ...repo,
+                ref: sha,
+            });
             result.push({
                 message:  data.commit.message.split('\n')[0],
                 url:  data.html_url,
@@ -52,10 +61,27 @@ async function getChangedFiles(gh,opts){
     return result;
 }
 
-async function postIssue(gh,opts){
-    const issues = gh.getIssues(opts.owner,opts.repo);
-    await issues.createIssue({
+async function postIssue(octokit,opts){
+    const repo = {
+        owner: opts.owner,
+        repo: opts.repo
+    }
+    await octokit.rest.issues.create({
+        ...repo,
         title: opts.title,
         body: opts.body
     });
+}
+
+async function getActionLastRunDate(octokit,opts){
+    const repo = {
+        owner: opts.owner,
+        repo: opts.repo
+    }
+    const runs = await octokit.rest.issues.create({
+        ...repo,
+        workflow_id: opts.workflow_id,
+        per_page: 1
+    });
+    return runs.data[0] && runs.data[0].created_at;
 }

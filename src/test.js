@@ -8,13 +8,15 @@ const params = {
     srcRepo: 'kit',
     srcDir: 'documentation',
     dstOwner: 'AlexxNB',
-    dstRepo: 'track-commits-to-issue'
+    dstRepo: 'track-commits-to-issue',
+    return: true
 }
 
 const prog = cli();
 
 prog.command('main', async () => {
-    await checkRepo(params);
+    const result = await checkRepo(params);
+    console.log(result);
 });
 
 prog.command('save-token', token => {

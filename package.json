@@ -8,7 +8,7 @@
     "build:dev": "node esbuild --dev",
     "token:save": "npm run build:dev && node dist/test --save-token",
     "token:delete": "npm run build:dev && node dist/test --clear-token",
-    "start": "npm run build:dev && node dist/test ",
+    "start": "npm run build:dev && node dist/test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,11 +22,10 @@
   },
   "homepage": "https://github.com/AlexxNB/track-commits-to-issue#readme",
   "devDependencies": {
-    "@actions/artifact": "^0.5.0",
     "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
     "dayjs": "^1.10.4",
     "esbuild": "^0.9.6",
-    "github-api": "^3.4.0",
     "sha256": "^0.2.0"
   }
 }
