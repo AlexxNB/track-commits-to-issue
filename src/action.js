@@ -4,7 +4,7 @@ import {checkRepo} from '@tracker';
 (async ()=>{
     try {
         const [owner,repo] = process.env['GITHUB_REPOSITORY'].split('/');
-        const workflow_id = process.env['GITHUB_WORKFLOW'];
+        const workflow_id = process.env['GITHUB_WORKFLOW'].split('/').pop();
         const opts = {
             token: core.getInput('token'),
             srcOwner: core.getInput('owner'),
