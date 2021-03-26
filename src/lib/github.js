@@ -72,7 +72,7 @@ async function postIssue(octokit,opts){
         body: opts.body
     });
 }
-octokit.rest.actions.listWorkflowRuns
+
 async function getActionLastRunDate(octokit,opts){
     const repo = {
         owner: opts.owner,
