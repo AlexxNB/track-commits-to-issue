@@ -18,7 +18,7 @@ import {checkRepo} from '@tracker';
             run_id
         }
         const output = await checkRepo(opts);
-        if(print) console.log(output);
+        if(opts.return) console.log(output);
       } catch (error) {
         core.setFailed(error.message);
       }
