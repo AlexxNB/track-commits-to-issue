@@ -3,9 +3,8 @@ import {checkRepo} from '@tracker';
 
 (async ()=>{
     try {
-        console.log(JSON.stringify(process.env))
         const [owner,repo] = process.env['GITHUB_REPOSITORY'].split('/');
-        const workflow_id = process.env['GITHUB_WORKFLOW'].split('/').pop();
+        const run_id = Number(process.env['GITHUB_RUN_ID']);
         const opts = {
             token: core.getInput('token'),
             srcOwner: core.getInput('owner'),
@@ -16,7 +15,7 @@ import {checkRepo} from '@tracker';
             return: core.getInput('print'),
             dstOwner: owner,
             dstRepo: repo,
-            workflow_id
+            run_id
         }
         await checkRepo(opts);
       } catch (error) {

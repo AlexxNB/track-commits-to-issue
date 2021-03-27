@@ -9,7 +9,7 @@ export async function checkRepo(options){
         owner: options.dstOwner,
         repo: options.dstRepo,
         max_period: options.max_period || 24,
-        workflow_id: options.workflow_id
+        run_id: options.run_id
     });
 
     const list = await getChangedFiles({
@@ -42,9 +42,9 @@ export async function checkRepo(options){
 async function getSince(opts){
     let since = dayjs().subtract(opts.max_period,'hours').toDate();
 
-    if(opts.workflow_id){
-        console.log('Check last run for workflow #'+opts.workflow_id);
+    if(opts.run_id){
         const GH = github(opts.token);
+        console.log('Check last run for curent workflow...');
         const date = await GH.getActionLastRunDate(opts);
         console.log('Last run was at:', date || 'Never' );
         if(date) since = date;

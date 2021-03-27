@@ -78,9 +78,15 @@ async function getActionLastRunDate(octokit,opts){
         owner: opts.owner,
         repo: opts.repo
     }
+
+    const run = await octokit.rest.actions.getWorkflowRun({
+        ...repo,
+        run_id:opts.run_id,
+      });
+
     const runs = await octokit.rest.actions.listWorkflowRuns({
         ...repo,
-        workflow_id: opts.workflow_id,
+        workflow_id: run.data.workflow_id,
         per_page: 2
     });
     return runs.data.total_count > 1 && runs.data.workflow_runs[1].updated_at;
