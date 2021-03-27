@@ -12,12 +12,13 @@ import {checkRepo} from '@tracker';
             srcDir: core.getInput('dir'),
             title: core.getInput('title'),
             max_period: core.getInput('hours'),
-            return: core.getInput('print'),
+            return: core.getInput('print') === 'true',
             dstOwner: owner,
             dstRepo: repo,
             run_id
         }
-        await checkRepo(opts);
+        const output = await checkRepo(opts);
+        if(print) console.log(output);
       } catch (error) {
         core.setFailed(error.message);
       }
