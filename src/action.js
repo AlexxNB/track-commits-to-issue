@@ -12,6 +12,7 @@ import {checkRepo} from '@tracker';
             srcDir: core.getInput('dir'),
             title: core.getInput('title'),
             max_period: core.getInput('hours'),
+            return: core.getInput('print'),
             dstOwner: owner,
             dstRepo: repo,
             workflow_id

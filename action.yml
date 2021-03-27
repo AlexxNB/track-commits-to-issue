@@ -19,6 +19,9 @@ inputs:
     description: 'Issue title'
   hours:  
     description: 'Maximum hours to retrieve commits first time'
+  print:  
+    description: Print markdown to action log instead creating issue
+    default: false
 runs:
   using: 'node12'
   main: 'dist/action.js'
